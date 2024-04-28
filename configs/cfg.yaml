@@ -1,0 +1,37 @@
+## global
+dataset: ['nerl', 'pems', 'wind', 'metr', 'pemsb']
+dataset_idx: 1 ## 0 for nerl, 1 for pems, 2 for win, 3 for metr, 4 for pemsb
+seed: 2022
+device: cuda:2
+tst_device: cuda:2
+emb_size: 64
+dec_hid: 32
+nmb_p: 5
+
+## data aug
+rob_val: True
+rep_times: 10
+
+## data
+inp_len: 24
+batch_size: 256
+tst_batch_size: 512
+
+## train upstream
+epochs: 1000
+layers: [32, 64] # layers[-1] = emb_size
+
+lr: 0.001
+wd: 0.00001
+decay_steps: [200, 300, 500]
+decay_rates: [0.5, 0.2, 0.5]
+retrain: True
+
+## train downstream
+downtask_layers: [64, 24]
+downtask_lr: 0.005
+downtask_epochs: 100
+finetune_lr: 0.0001
+lr_decay_steps: [20, 40, 150]
+lr_decay_rates: [0.5, 0.8, 0.5]
+
